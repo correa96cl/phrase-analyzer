@@ -8,18 +8,38 @@
         body { font-family: Arial, sans-serif; margin: 20px; }
         .ui-panel { width: 600px; margin-bottom: 20px; }
         textarea { width: 100%; }
+        .error-message { color: #d9534f; margin: 10px 0; }
     </style>
 </h:head>
 <h:body>
     <h1>Analisador de Frases</h1>
     
-    <h:form>
-        <p:panel header="Digite sua frase">
-            <p:inputTextarea value="#{phraseAnalyzerController.inputPhrase}" 
-                           rows="5" cols="50" autoResize="false" style="width: 100%;"/>
-            <p:commandButton value="Analisar" action="#{phraseAnalyzerController.analyze}" 
-                           update="results" style="margin-top: 10px;"/>
+    <h:form id="mainForm">
+        <p:panel header="Digite sua frase" id="inputPanel">
+            <p:inputTextarea id="inputPhrase"
+                           value="#{phraseAnalyzerController.inputPhrase}" 
+                           rows="5" cols="50" 
+                           autoResize="false" 
+                           style="width: 100%;"/>
+            
+            <p:message for="inputPhrase" styleClass="error-message"/>
+            
+            <p:commandButton value="Analisar" 
+                           action="#{phraseAnalyzerController.analyze}" 
+                           update="results errorMessage inputPanel" 
+                           style="margin-top: 10px;"/>
+                           
+            <p:commandButton value="Limpar" 
+                           action="#{phraseAnalyzerController.limpar}" 
+                           update="results inputPanel errorMessage" 
+                           style="margin-top: 10px;"/>
         </p:panel>
+        
+        <p:outputPanel id="errorMessage">
+            <h:outputText value="#{phraseAnalyzerController.errorMessage}" 
+                         styleClass="error-message"
+                         rendered="#{not empty phraseAnalyzerController.errorMessage}"/>
+        </p:outputPanel>
         
         <p:panel id="results" header="Resultados" style="margin-top: 20px;">
             <h:outputText value="Total de palavras distintas: #{phraseAnalyzerController.distinctWordsCount}" 
