@@ -1,0 +1,4 @@
+com/example/model/AnalysisResult.class
+com/example/service/PhraseService.class
+com/example/controller/PhraseAnalyzerController.class
+com/example/model/WordCount.class

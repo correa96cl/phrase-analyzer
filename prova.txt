@@ -1,0 +1,18 @@
+cd /Users/marcelovalderramacorrea/Downloads/wildfly-10.1.0.Final/bin
+./standalone.sh
+
+
+cd /Users/marcelovalderramacorrea/Downloads/wildfly-10.1.0.Final/bin
+./standalone.sh -b 0.0.0.0
+
+cd wildfly-10.1.0.Final/bin
+./standalone.sh -c standalone-full.xml
+    
+    JAVA_OPTS="$JAVA_OPTS -Djava.security.properties=/Users/marcelovalderramacorrea/Downloads/wildfly-10.1.0.Final/bin/java.security"
+JAVA_OPTS="$JAVA_OPTS -Djboss.modules.system.pkgs=org.jboss.byteman,org.jboss.logmanager"
+
+
+nano /Users/marcelovalderramacorrea/Downloads/wildfly-10.1.0.Final/bin/standalone.conf
+
+
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
